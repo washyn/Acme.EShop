@@ -25,6 +25,7 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
@@ -37,7 +38,7 @@ namespace Acme.EShop;
     typeof(AbpAspNetCoreMultiTenancyModule),
     typeof(EShopApplicationModule),
     typeof(EShopEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
+    // typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
@@ -62,6 +63,11 @@ public class EShopHttpApiHostModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         var hostingEnvironment = context.Services.GetHostingEnvironment();
 
+        Configure<AbpTenantResolveOptions>(options =>
+        {
+            // options.AddDomainTenantResolver("{0}.app-domain.com"); // add this for enable route tenant resolver
+        });
+
         ConfigureAuthentication(context);
         ConfigureBundles();
         ConfigureUrls(configuration);
@@ -80,13 +86,13 @@ public class EShopHttpApiHostModule : AbpModule
     {
         Configure<AbpBundlingOptions>(options =>
         {
-            options.StyleBundles.Configure(
-                LeptonXLiteThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-styles.css");
-                }
-            );
+            // options.StyleBundles.Configure(
+            //     LeptonXLiteThemeBundles.Styles.Global,
+            //     bundle =>
+            //     {
+            //         bundle.AddFiles("/global-styles.css");
+            //     }
+            // );
         });
     }
 

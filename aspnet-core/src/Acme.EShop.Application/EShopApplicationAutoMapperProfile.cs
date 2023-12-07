@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Acme.EShop.Products;
+using AutoMapper;
 
 namespace Acme.EShop;
 
@@ -9,5 +10,7 @@ public class EShopApplicationAutoMapperProfile : Profile
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
+
+        CreateMap<ProductDto, Product>().ReverseMap();
     }
 }

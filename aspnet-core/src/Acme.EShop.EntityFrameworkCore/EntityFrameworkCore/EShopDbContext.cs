@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acme.EShop.Products;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -53,6 +54,8 @@ public class EShopDbContext :
 
     #endregion
 
+    public DbSet<Product> Products { get; set; }
+    
     public EShopDbContext(DbContextOptions<EShopDbContext> options)
         : base(options)
     {
